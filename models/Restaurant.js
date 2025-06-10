@@ -6,7 +6,6 @@ exports.validateResDetails = function (resDetails) {
     name: Joi.string().required().min(5).max(50),
     address: Joi.string().min(10).required(),
     cuisine: Joi.array().items(Joi.string().required().min(3).max(30)).required(),
-    isOpen: Joi.boolean()
   });
 };
 
@@ -32,7 +31,10 @@ const restaurantSchema = new mongoose.Schema({
       required: true,
     },
   ],
-  rating: Number,
+  rating: {
+    type: Number,
+    default: 5
+  },
   isOpen: {
     type: Boolean,
     required: true,
