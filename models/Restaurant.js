@@ -7,6 +7,8 @@ exports.validateResDetails = function (resDetails) {
     address: Joi.string().min(10).required(),
     cuisine: Joi.array().items(Joi.string().required().min(3).max(30)).required(),
   });
+
+  return schema.validate(resDetails);
 };
 
 const restaurantSchema = new mongoose.Schema({

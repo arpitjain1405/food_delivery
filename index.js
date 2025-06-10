@@ -1,9 +1,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const restaurantRoutes = require('./routes/restaurantRoutes');
 
 const app = express();
 
 app.use(express.json());
+app.use('/api/restaurants', restaurantRoutes)
 
 mongoose
   .connect("mongodb://localhost/food_delivery")
