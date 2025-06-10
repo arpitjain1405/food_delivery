@@ -12,6 +12,14 @@ exports.validateUser = function(user){
     return schema.validate(user);
 }
 
+exports.validateLogin = function(login){
+    const schema = Joi.object({
+        phoneNumber: Joi.string().required().length(10),
+        password: Joi.string().required().min(6)
+    })
+    return schema.validate(login);
+}
+
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
