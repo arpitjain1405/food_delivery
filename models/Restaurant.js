@@ -15,13 +15,13 @@ const restaurantSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
-    min: 5,
-    max: 50,
+    minLength: 5,
+    maxLength: 50,
   },
   address: {
     type: String,
     required: true,
-    min: 10,
+    minLength: 10,
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
