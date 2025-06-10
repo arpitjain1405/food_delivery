@@ -8,7 +8,7 @@ exports.validateCuisine = function(cuisine){
     return schema.validate(cuisine);
 }
 
-const cuisineSchema = mongoose.Schema({
+const cuisineSchema = new mongoose.Schema({
     name: {
         type: String, 
         required: true,
