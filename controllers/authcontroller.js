@@ -30,10 +30,10 @@ exports.login = async (req, res) => {
   const { phoneNumber, password } = req.body;
 
   const user = await User.findOne({ phoneNumber });
-  if(!user) return res.status(400).send("Invalid credentials.");
+  if(!user) return res.status(401).send("Invalid credentials.");
 
   const verifyPassword = await bcrypt.compare(password, user.password);
-  if(!verifyPassword) return res.status(400).send("Invalid credentials");
+  if(!verifyPassword) return res.status(401).send("Invalid credentials");
 
   const token = jwt.sign({ _id: user._id }, "jwtPrivateKey");
   res.header('x-auth-token', token).send(token);
