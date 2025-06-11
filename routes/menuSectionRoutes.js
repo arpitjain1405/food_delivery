@@ -1,13 +1,16 @@
 const express = require('express');
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 const menuSectionController = require('../controllers/menuSectioncontroller');
+const auth = require('../middleware/auth');
+const checkRestaurantOwnership = require('../middleware/checkRestaurantOwnership');
+const checkMenuSectionOwnership = require('../middleware/checkMenuSectionOwnership');
 
 router.get('/:id', menuSectionController.getMenuSectionById);
-router.put('/:id', menuSectionController.updateMenuSection);
-router.delete(':id', menuSectionController.deleteMenuSection);
+router.put('/:id', auth, checkMenuSectionOwnership, menuSectionController.updateMenuSection);
+router.delete('/:id', auth, checkMenuSectionOwnership, menuSectionController.deleteMenuSection);
 
 //nested
 router.get('/', menuSectionController.getRestaurantAllMenuSections)
-router.post('/', menuSectionController.createMenuSection);
+router.post('/', auth, checkRestaurantOwnership(), menuSectionController.createMenuSection);
 
 module.exports = router;

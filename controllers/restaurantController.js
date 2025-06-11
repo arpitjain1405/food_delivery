@@ -1,4 +1,5 @@
 const { Restaurant, validateResDetails } = require("../models/Restaurant");
+const { Cuisine } = require('../models/Cuisine');
 
 exports.getAllRestaurants = async (req, res) => {
   const restaurants = await Restaurant.find();

@@ -28,8 +28,7 @@ const userSchema = new mongoose.Schema({
         maxLength: 50
     },
     email: {
-        type: String,
-        unique: true
+        type: String
     },
     password: {
         type: String,
@@ -46,6 +45,12 @@ const userSchema = new mongoose.Schema({
     address: {
         type: String,
         minLength: 10
+    },
+    role: {
+        type: String,
+        required: true,
+        enum: ["customer", "restaurant", "admin"],
+        default: "customer"
     }
 })
 

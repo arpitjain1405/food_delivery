@@ -16,7 +16,10 @@ exports.createCuisine = async (req, res) => {
   const { error } = validateCuisine(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
-  const cuisine = await Cuisine.create({
+  let cuisine = await Cuisine.findOne({ name: req.body.name });
+  if(cuisine) return res.status(400).send("Cuisine already exist");
+
+  cuisine = await Cuisine.create({
     name: req.body.name,
   });
   res.status(201).send(cuisine);
@@ -28,6 +31,9 @@ exports.updateCuisine = async (req, res) => {
 
   const error = validateCuisine(req.body);
   if (error) return res.status(400).send(error.details[0].message);
+
+  cuisine = await Cuisine.findOne({ name: req.body.name });
+  if(cuisine) return res.status(400).send("Cuisine already exist");
 
   cuisine = await Cuisine.findByIdAndUpdate(
     req.body.id,
